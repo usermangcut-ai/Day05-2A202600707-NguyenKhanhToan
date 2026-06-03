@@ -1,85 +1,131 @@
-# Toolkit — Từ Evidence Đến Build Slice
-
-Dùng sau khi nhóm đã có evidence. Mục tiêu là chốt một build slice đủ nhỏ cho Day 06.
+# Synthesis & Decide — Từ Evidence đến Build Slice
 
 ## 1. Gom evidence thành cụm
 
-Gom theo **workflow/pain**, không gom theo tên feature.
+Không gom theo feature, gom theo workflow/pain.
 
-Ví dụ cụm tốt:
+### Cụm 1 — Google AI Overview chỉ trả text, thiếu tương tác & tích hợp
 
-- "Không biết chọn chuyên khoa"
-- "Không hiểu vì sao bị tính phí"
-- "Muốn sửa output nhưng không có chỗ sửa"
-- "Bot trả lời tự tin nhưng không dẫn nguồn"
+Self-use evidence cho thấy Google AI Overview trả về đoạn văn bản lịch trình rất ngắn (chỉ buổi sáng), không có nút tương tác, không hiển thị bản đồ, không ước lượng thời gian di chuyển, không có nút “Thêm vào Calendar”, không hỏi lại sở thích hay độ tuổi.
 
-## 2. Viết insight
+Pain thật: người dùng có gợi ý dạng chữ nhưng không thể dùng ngay, vẫn phải tự tra Maps, tự nhập Calendar, không thể điều chỉnh.
 
-Form:
+### Cụm 2 — Planning bị phân mảnh giữa nhiều tool
+
+Người dùng phải tự nhảy qua nhiều công cụ: Google Search (tìm gợi ý), Google Maps (xem khoảng cách), blog/review (kiểm tra địa điểm), Calendar (tự tạo lịch), Messenger/Zalo (hỏi gia đình/bạn bè), Notes/Docs (lưu kế hoạch).
+
+Pain thật: workflow bị đứt đoạn, không phải thiếu một feature nhỏ.
+
+### Cụm 3 — AI hiện tại (ChatGPT/Gemini) mạnh ở gợi ý, yếu ở execution
+
+Các AI chat có thể viết itinerary, nhưng nếu không kiểm chứng, không xuất lịch, không chỉnh sửa cộng tác, thì vẫn chỉ là đoạn text.
+
+Pain thật: câu trả lời AI chưa biến thành hành động.
+
+### Cụm 4 — User cần kiểm soát vì plan có rủi ro cá nhân
+
+Đi chơi gia đình có trẻ nhỏ, người già, ngân sách, thời tiết và sức khỏe. Nếu AI đoán sai, hậu quả không quá nghiêm trọng như y tế/pháp lý, nhưng đủ làm người dùng mất niềm tin.
+
+Pain thật: cần AI hỗ trợ nhưng không muốn AI tự quyết toàn bộ.
+
+## 2. Insight
 
 ```text
-User [segment] không chỉ cần [surface need].
-Họ thật ra cần [deeper need],
-vì [evidence pattern].
+User là phụ huynh hoặc nhóm bạn không chỉ cần một bản gợi ý dạng text từ Google AI Overview.
+Họ thật ra cần một công cụ biến ý định mơ hồ thành lịch trình có thể dùng được,
+vì evidence cho thấy Google AI Overview chỉ trả về text tĩnh, thiếu Maps, Calendar và khả năng tùy chỉnh.
 ```
 
-Ví dụ:
+## 3. Opportunity
 
 ```text
-Người lần đầu đi khám không chỉ cần danh sách chuyên khoa.
-Họ cần hỗ trợ ra quyết định an toàn,
-vì nhiều review/observation cho thấy họ không biết triệu chứng của mình nên đi khoa nào.
-```
-
-## 3. Viết opportunity
-
-Form:
-
-```text
-Cơ hội là dùng AI để [augment/automate hành động hẹp],
-giúp user [kết quả],
-trong khi vẫn kiểm soát [failure/risk].
+Cơ hội là dùng AI để augment hành động hẹp: từ yêu cầu đi chơi cuối tuần, AI hỏi thêm khi thiếu thông tin (sở thích, độ tuổi, phương tiện), tạo itinerary theo ngày/giờ, hiển thị địa điểm trên Maps, cho phép chỉnh sửa, và xuất sang Google Calendar.
+Việc này giúp user giảm thời gian tìm kiếm và tổng hợp,
+trong khi vẫn kiểm soát failure bằng confirmation, correction path, và yêu cầu xác minh khi thông tin chưa chắc.
 ```
 
 ## 4. Chọn build slice
 
-Build slice tốt phải qua 5 câu hỏi:
+### Build slice chính thức (đúng form)
 
-| Câu hỏi | Đạt khi |
-|---|---|
-| User cụ thể chưa? | Nói được ai dùng, trong bối cảnh nào. |
-| Task đủ hẹp chưa? | Demo được trong 3-5 phút. |
-| AI decision rõ chưa? | AI gợi ý/tự làm một việc cụ thể. |
-| Failure path rõ chưa? | Có một case AI không chắc hoặc sai để test. |
-| Có evidence không? | Có bằng chứng từ self-use/review/user/competitor. |
+```text
+Cho phụ huynh hoặc nhóm bạn đang lên kế hoạch đi chơi cuối tuần nhưng chỉ nhận được gợi ý dạng text từ Google AI Overview,
+prototype dùng AI để hỏi về sở thích, thời gian, phạm vi, phương tiện, độ tuổi,
+tạo lịch trình theo khung giờ, hiển thị trên Google Maps, có nút "Thêm vào Google Calendar",
+và xử lý failure mode "AI không đủ thông tin để tạo lịch" bằng cách hỏi lại các câu cụ thể (sở thích, độ tuổi, phương tiện) và đưa ra các lựa chọn gợi ý.
+```
+
+### 5 câu hỏi kiểm tra build slice
+
+| Câu hỏi | Đánh giá |
+| --- | --- |
+| User cụ thể chưa? | ✅ Đạt. Phụ huynh hoặc nhóm bạn lên kế hoạch đi chơi cuối tuần. |
+| Task đủ hẹp chưa? | ✅ Đạt. Chỉ build flow tạo lịch trình 1-2 ngày + Maps + xuất Calendar, không build booking thật. |
+| AI decision rõ chưa? | ✅ Đạt. AI chọn/gợi ý lịch trình và thứ tự hoạt động; user quyết cuối (augmentation). |
+| Failure path rõ chưa? | ✅ Đạt. AI thiếu thông tin (sở thích mơ hồ) → hỏi lại và đưa lựa chọn. |
+| Có evidence không? | ✅ Đạt. Có self-use evidence (ảnh Google AI Overview) và nguồn public (TechCrunch, Stippl). Nhóm sẽ chụp ảnh xác minh các bài viết trước M1. |
 
 ## 5. Quyết định: giữ, giảm scope, hay đổi hướng?
 
-| Tình huống | Quyết định |
-|---|---|
-| Evidence yếu, user mơ hồ | Dừng build sâu; quay lại research 20 phút. |
-| Ý tưởng quá rộng | Giữ domain, cắt xuống một flow. |
-| AI không cần thiết | Dùng rule/manual prototype; ghi rõ vì sao không dùng AI sâu. |
-| Rủi ro cao | Chọn augmentation hoặc conditional automation. |
-| Không demo được trong 1 ngày | Đưa phần lớn vào backlog, giữ một path nhỏ. |
+**Quyết định:** Giữ domain Travel & Hospitality, giảm scope xuống một flow khả thi trong 1 ngày.
 
-## 6. Câu chốt cuối
+**Không build trong Day 06:**
+- Booking thật (khách sạn, nhà hàng, vé)
+- Tự động kiểm tra giá vé, giờ mở cửa, thời tiết real-time
+- Collaborative editing nhiều người
+- Lưu preference dài hạn
+- Auto invite người thân qua Calendar
+- Expense splitting
+- Mobile app
 
-Điền câu này trước khi rời lớp:
-
+**Chỉ build:**
 ```text
-Dựa trên [evidence],
-nhóm sẽ build [prototype slice],
-cho [user],
-để giải quyết [pain],
-bằng cách AI [augment/automate task],
-và sẽ test failure path [failure mode].
+Input nhu cầu (chat hoặc form) → AI hỏi thêm nếu thiếu thông tin → tạo itinerary theo khung giờ → hiển thị địa điểm trên Maps (mock hoặc iframe) → cho phép chỉnh sửa thủ công (kéo thả hoặc sửa text) → xuất lịch dạng ICS/CSV hoặc nút "Thêm vào Google Calendar" (mock link).
 ```
 
-## 7. Backlog
+## 6. Auto/Aug quyết định
 
-Những thứ **không build trong Day 06**:
+**Chọn:** **Augmentation** (AI gợi ý, user quyết định cuối cùng).
 
-- 
-- 
-- 
+### Lý do
+AI không nên tự động quyết định lịch đi chơi vì sở thích gia đình là ngữ cảnh cá nhân, có rủi ro về thời gian, sức khỏe trẻ nhỏ. User phải giữ quyền kiểm soát và chỉnh sửa.
+
+### Human role
+- **Reviewer:** xem lại itinerary trước khi dùng.
+- **Decider:** chọn giữ/bỏ địa điểm, điều chỉnh thời gian.
+- **Rescuer:** sửa trực tiếp khi AI đề xuất không phù hợp.
+- **Trainer:** phản hồi “không phù hợp” để cải thiện gợi ý sau.
+
+## 7. Eval plan sơ bộ (4 paths)
+
+| Path | Test case | Expected output |
+|------|-----------|------------------|
+| **Happy** | Gia đình 4 người, trẻ 7 tuổi, xuất phát Hà Nội, thích thiên nhiên, 2 ngày, ô tô. | Lịch trình 2 ngày có giờ, địa điểm, kèm Maps và nút xuất Calendar. |
+| **Low‑confidence** | “Muốn đi chơi cuối tuần với gia đình” (thiếu thông tin). | AI hỏi lại: đi mấy người, có trẻ nhỏ không, từ đâu, trong ngày hay qua đêm, ngân sách. |
+| **Failure** | Gia đình có trẻ 4 tuổi, yêu cầu “nhẹ nhàng, không leo núi” nhưng AI đề xuất trekking nặng. | User có nút “Không phù hợp” → AI tạo lại lịch trình nhẹ hơn. |
+| **Correction** | User đổi ngày đi từ thứ 7 sang chủ nhật, bỏ một địa điểm. | AI cập nhật lại itinerary, sắp xếp lại thời gian, xuất lại lịch. |
+
+## 8. Câu chốt cuối
+
+```text
+Dựa trên self-use evidence (Google AI Overview chỉ trả text, thiếu Maps/Calendar/tương tác), nguồn public về hạn chế của AI chat trong travel planning, và pattern từ Stippl,
+nhóm sẽ build prototype “AI Weekend Planner”,
+cho phụ huynh hoặc nhóm bạn đang lên kế hoạch đi chơi cuối tuần,
+để giải quyết pain: Google AI Overview chỉ đưa ra gợi ý dạng text, không thể dùng ngay, không tích hợp Maps hay Calendar,
+bằng cách AI augment task tạo itinerary (hỏi thêm khi thiếu thông tin, hiển thị Maps, xuất Calendar, cho phép chỉnh sửa),
+và sẽ test failure path khi AI không đủ thông tin hoặc đề xuất lịch trình không phù hợp với gia đình có trẻ nhỏ.
+```
+
+## 9. Backlog (không build trong Day 06)
+
+- Booking thật (khách sạn, nhà hàng, vé)
+- Tự động kiểm tra giá vé, giờ mở cửa, thời tiết real-time
+- Collaborative editing nhiều người (chia sẻ link chỉnh sửa)
+- Lưu preference dài hạn (đăng nhập)
+- Auto invite người thân qua Calendar
+- Expense splitting
+- Mobile app (chỉ web/mock)
+- Maps routing real-time (chỉ hiển thị điểm, không tính đường đi thực tế nếu không đủ thời gian)
+- Đồng bộ Google Calendar thật nếu không đủ thời gian (có thể thay bằng mock nút “Tạo sự kiện mẫu”)
+
+---
